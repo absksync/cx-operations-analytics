@@ -23,6 +23,10 @@ CREATE TABLE support_tickets (
 
     status VARCHAR(20),
 
+    sla_hours INT,
+
+    is_escalated BOOLEAN,
+
     created_at TIMESTAMP NOT NULL,
     first_response_at TIMESTAMP,
     resolved_at TIMESTAMP
