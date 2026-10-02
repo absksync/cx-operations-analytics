@@ -2,51 +2,46 @@
 
 <div align="center">
 
-### Customer Experience • Support Operations • Business Intelligence
+## Customer Experience Analytics Platform
 
-**Python ETL → PostgreSQL → SQL Analytics → Power BI**
+### Python • PostgreSQL • SQL • Power BI • Docker
 
-A production-style analytics project that transforms customer support operations data into actionable business intelligence through ETL pipelines, KPI development, SQL analytics, and interactive Power BI dashboards.
+End-to-end analytics project that transforms customer support operations data into actionable business intelligence using ETL pipelines, SQL analytics, KPI development, and interactive Power BI dashboards.
 
-<br>
-
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-ETL-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-Analytics-4479A1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Power BI](https://img.shields.io/badge/Power_BI-Dashboard-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
-![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-Analytics-blue?style=for-the-badge)
+![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 </div>
 
 ---
 
-## 🎯 Project Overview
+# 🎯 Business Problem
 
-Customer support teams generate large amounts of operational data every day, but raw ticket records alone do not provide actionable insights.
+Customer support teams generate thousands of tickets every month across multiple categories such as login issues, payment failures, account access problems, subscription requests, and feature requests.
 
-This project simulates a real-world SaaS customer support environment and builds a complete analytics workflow that transforms support ticket data into meaningful business intelligence.
+Without a centralized analytics layer, support leaders struggle to answer critical business questions:
 
-The platform combines:
+- Which ticket categories generate the highest workload?
+- Which issues lead to the most escalations?
+- How quickly are tickets resolved?
+- How satisfied are customers with support interactions?
+- Which agents perform most efficiently?
+- How does customer satisfaction change over time?
 
-- Python ETL Pipelines
-- PostgreSQL Database Design
-- SQL Analytics
-- KPI Development
-- Power BI Dashboards
-- Customer Experience Analytics
-
-The goal is to help support teams understand service performance, customer satisfaction, ticket demand, escalations, and agent workload through data-driven decision making.
+This project builds a complete analytics workflow to answer these questions through data engineering, SQL analytics, KPI reporting, and Power BI dashboards.
 
 ---
 
-## 💼 Recruiter Snapshot
+# 💼 Recruiter Snapshot
 
-| Area | Details |
-|--------|---------|
+| Category | Details |
+|-----------|----------|
 | Domain | Customer Experience Analytics |
-| Industry | SaaS Customer Support |
-| Dataset Size | 100,000 Tickets |
+| Industry | SaaS Support Operations |
+| Dataset | 100,000 Support Tickets |
 | Customers | 5,000 |
 | Agents | 50 |
 | Feedback Records | 40,000 |
@@ -59,13 +54,13 @@ The goal is to help support teams understand service performance, customer satis
 
 ---
 
-## 🛠 Skills Demonstrated
+# 🛠 Skills Demonstrated
 
 ### Data Analytics
 
 - Data Cleaning
 - Data Transformation
-- Data Modeling
+- Data Validation
 - Exploratory Data Analysis
 - KPI Development
 - Business Intelligence
@@ -75,29 +70,28 @@ The goal is to help support teams understand service performance, customer satis
 - Joins
 - Aggregations
 - Views
-- KPI Queries
-- Analytical Reporting
-- Performance Analysis
+- Window Functions
+- KPI Reporting
+- Operational Analytics
 
 ### Customer Experience Analytics
 
-- Customer Satisfaction (CSAT)
-- Escalation Analysis
+- Customer Satisfaction Analysis (CSAT)
 - Resolution Time Analysis
-- First Response Time Analysis
-- Agent Performance Analysis
-- Support Operations Analytics
+- Escalation Analysis
+- Ticket Category Analysis
+- Agent Performance Analytics
+- Support Operations Reporting
 
 ### Power BI
 
-- Dashboard Design
-- Interactive Reporting
+- Interactive Dashboards
 - KPI Monitoring
-- Business Reporting
+- Executive Reporting
 - Trend Analysis
-- Data Visualization
+- Business Intelligence Visualization
 
-### Engineering
+### Data Engineering
 
 - Python
 - Pandas
@@ -108,140 +102,126 @@ The goal is to help support teams understand service performance, customer satis
 
 ---
 
-## 🚀 Business Problem
-
-Support organizations often struggle to answer questions such as:
-
-- Which ticket categories generate the highest workload?
-- Which issues lead to the most escalations?
-- How quickly are customers receiving support?
-- How efficiently are tickets being resolved?
-- How is workload distributed across agents?
-- How does customer satisfaction change over time?
-
-This project provides an analytical framework to answer these questions through SQL analytics and Power BI reporting.
-
----
-
-## 🏗 Architecture
+# 🏗 Architecture
 
 ```text
-Raw Support Data
-        │
-        ▼
+Raw Ticket Data
+       │
+       ▼
 Python ETL Pipeline
-        │
-        ▼
+       │
+       ▼
 PostgreSQL Database
-        │
-        ▼
-SQL Views & KPI Layer
-        │
-        ▼
-Analytics Dataset
-        │
-        ▼
+       │
+       ▼
+SQL Analytics Layer
+       │
+       ▼
+KPIs & Business Metrics
+       │
+       ▼
 Power BI Dashboards
+       │
+       ▼
+Business Insights
 ```
 
 ---
 
-## 📦 Dataset Overview
+# 📦 Dataset Overview
 
 | Entity | Records |
 |----------|---------:|
 | Customers | 5,000 |
-| Support Agents | 50 |
-| Support Tickets | 100,000 |
-| Customer Feedback | 40,000 |
+| Agents | 50 |
+| Tickets | 100,000 |
+| Feedback Records | 40,000 |
 | Total Records | 145,000+ |
-
-> All records are synthetic and created for analytics and portfolio purposes.
 
 ---
 
 # 📊 Power BI Dashboard Suite
 
-The reporting layer consists of four business-focused dashboards.
+The project includes four interactive business intelligence dashboards designed for support leaders, operations managers, and customer experience teams.
 
 ---
 
-## 1️⃣ Executive Overview
+## 1️⃣ Executive Overview Dashboard
 
-![Executive Overview](docs/screenshots/powerbi-executive-overview.png)
+<img src="docs/screenshots/powerbi-executive-overview.png" width="100%">
 
 ### KPIs
 
 - Total Tickets
-- Open Tickets
 - Resolved Tickets
+- Open Tickets
 - Escalated Tickets
 - Resolution Rate
 - Average CSAT
 
 ### Insights
 
-- Ticket Volume by Month
-- Ticket Status Distribution
-- Ticket Category Analysis
+- Monthly Ticket Volume
+- Category Distribution
 - Priority Distribution
-- Service Health Overview
+- Ticket Status Overview
+- Service Health Monitoring
 
-### Business Value
+### Business Impact
 
-Provides leadership teams with an overall view of support operations and service performance.
+Provides leadership teams with a high-level operational view of support performance and customer experience.
 
 ---
 
 ## 2️⃣ Agent Performance Dashboard
 
-![Agent Performance](docs/screenshots/powerbi-agent-performance.png)
+<img src="docs/screenshots/powerbi-agent-performance.png" width="100%">
 
 ### KPIs
 
-- Tickets Handled per Agent
-- Average Resolution Hours
-- Average CSAT per Agent
+- Tickets Handled Per Agent
+- Average Resolution Time
+- Average CSAT Score
 
 ### Insights
 
-- Workload Distribution
+- Agent Workload Distribution
 - Resolution Efficiency
-- Agent Performance Comparison
+- Customer Satisfaction Comparison
 - Resolution Time vs CSAT Analysis
 
-### Business Value
+### Business Impact
 
-Helps identify operational efficiency patterns across support teams.
+Helps managers identify top-performing agents and operational bottlenecks.
 
 ---
 
 ## 3️⃣ Time Trends Dashboard
 
-![Time Trends](docs/screenshots/powerbi-time-trends.png)
+<img src="docs/screenshots/powerbi-time-trends.png" width="100%">
 
 ### KPIs
 
 - Monthly Ticket Volume
 - Resolution Time Trend
-- Monthly CSAT Trend
+- Customer Satisfaction Trend
 
 ### Insights
 
-- Ticket Demand Changes
-- Service Performance Trends
+- Ticket Growth Patterns
+- Seasonal Demand Changes
 - Category Trends
 - Status Trends
 
-### Business Value
+### Business Impact
 
-Allows teams to monitor operational changes and long-term trends.
+Supports capacity planning and long-term service improvement initiatives.
 
 ---
 
 ## 4️⃣ Customer Insights Dashboard
 
-![Customer Insights](docs/screenshots/powerbi-customer-insights.png)
+<img src="docs/screenshots/powerbi-customer-insights.png" width="100%">
 
 ### KPIs
 
@@ -252,113 +232,111 @@ Allows teams to monitor operational changes and long-term trends.
 ### Insights
 
 - Customer Satisfaction Distribution
-- Category Contribution
-- Resolution Time vs CSAT
-- Escalation Breakdown
+- Escalation Drivers
+- Category Contribution Analysis
+- Resolution Time vs Satisfaction Correlation
 
-### Business Value
+### Business Impact
 
-Provides visibility into customer experience drivers and support quality indicators.
+Provides visibility into customer experience drivers and support quality metrics.
 
 ---
 
-## 📈 Core KPIs
+# 📈 Core KPIs
 
 ### Resolution Rate
 
-```text
+```sql
 Resolved Tickets / Total Tickets
 ```
 
 ### Escalation Rate
 
-```text
+```sql
 Escalated Tickets / Total Tickets
 ```
 
-### First Response Time
+### Average Resolution Time
 
-```text
-First Response Timestamp - Ticket Creation Timestamp
+```sql
+Resolution Timestamp - Created Timestamp
 ```
 
-### Resolution Time
+### Average CSAT
 
-```text
-Resolution Timestamp - Ticket Creation Timestamp
+```sql
+AVG(csat_score)
 ```
 
-### Customer Satisfaction (CSAT)
+### Ticket Volume
 
-```text
-Average Customer Satisfaction Score
+```sql
+COUNT(ticket_id)
 ```
 
 ---
 
-## 🔍 Business Questions Answered
+# 🔍 Business Questions Answered
 
-### Operations
+### Operations Analytics
 
-- Which ticket categories generate the highest demand?
+- Which ticket categories generate the highest workload?
 - Which categories create the most escalations?
-- How is workload distributed across support agents?
+- What is the current ticket resolution rate?
+- How are tickets distributed across priorities?
 
-### Customer Experience
+### Customer Experience Analytics
 
-- Which categories receive the highest CSAT?
-- Does longer resolution time affect customer satisfaction?
+- What is the overall customer satisfaction score?
+- Which categories have the highest customer satisfaction?
+- How does resolution time impact customer satisfaction?
 
-### Service Performance
+### Agent Performance Analytics
 
-- How has ticket volume changed over time?
-- What is the average resolution time?
-- What percentage of tickets are successfully resolved?
+- Which agents handle the highest volume of tickets?
+- Which agents maintain the best CSAT scores?
+- How does agent performance vary across metrics?
 
 ---
 
-## 🧮 SQL Analytics Layer
+# 🧮 SQL Analytics Layer
 
-The analytical SQL layer includes KPI queries for:
+The SQL analytics layer includes reporting for:
 
 - Ticket Volume Analysis
 - Category Analysis
-- Priority Analysis
-- Resolution Rate Analysis
 - Escalation Analysis
-- CSAT Analysis
+- Resolution Rate Analysis
+- Priority Analysis
+- CSAT Reporting
 - Agent Performance Analysis
-- Monthly Trend Analysis
+- Monthly Trends
 - Resolution Time Analysis
-- Service Operations Reporting
+- Operational KPI Reporting
 
 ---
 
-## 🛠 Technology Stack
+# 🛠 Technology Stack
 
 | Layer | Technology |
-|---------|-----------|
+|---------|------------|
 | Data Generation | Python |
-| Data Processing | Pandas |
-| Database | PostgreSQL 16 |
-| Query Layer | SQL |
-| Analytics | SQL Views |
-| Business Intelligence | Power BI |
+| ETL | Pandas |
+| Database | PostgreSQL |
+| Analytics | SQL |
+| Visualization | Power BI |
 | Infrastructure | Docker |
 | Version Control | Git & GitHub |
 
 ---
 
-## 📁 Repository Structure
+# 📂 Repository Structure
 
 ```text
 cx-operations-analytics
 │
 ├── api/
 ├── data/
-│   ├── raw/
-│   └── processed/
-│
 ├── docs/
 │   └── screenshots/
 │       ├── powerbi-executive-overview.png
@@ -375,61 +353,57 @@ cx-operations-analytics
 
 ---
 
-## 🎤 Resume Description
+# 🎤 Resume Project Description
 
-**Built an end-to-end Customer Experience Analytics platform using Python, PostgreSQL, SQL, and Power BI. Developed ETL pipelines for support operations data, designed analytical SQL views and KPI layers, and created interactive dashboards covering ticket operations, customer satisfaction, escalation analysis, resolution efficiency, and agent performance.**
+Built an end-to-end Customer Experience Analytics platform using Python, PostgreSQL, SQL, and Power BI. Developed ETL pipelines, analytical SQL reporting layers, KPI frameworks, and interactive dashboards to analyze support operations, customer satisfaction, ticket escalations, agent performance, and service efficiency across 100,000 support tickets.
 
 ---
 
-## 🎓 Learning Outcomes
-
-This project demonstrates practical experience with:
+# 🎓 Key Learning Outcomes
 
 - Data Engineering Fundamentals
 - Relational Database Design
 - SQL Analytics
+- KPI Development
 - Business Intelligence Reporting
 - Customer Experience Analytics
-- KPI Development
 - Dashboard Design
 - End-to-End Analytics Workflows
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 ### Abhishek Singh
 
 Computer Science Engineering (Data Science)
 
-Interested in:
+Areas of Interest:
 
 - Data Analytics
 - Business Intelligence
-- Customer Experience Analytics
 - Product Analytics
+- Customer Experience Analytics
 - Data Engineering
 
 GitHub: https://github.com/absksync
 
 ---
 
-## ⭐ Project Outcome
+# ⭐ Project Outcome
 
 ```text
-Raw Data
-   ↓
+Support Data
+    ↓
 ETL Pipeline
-   ↓
+    ↓
 PostgreSQL
-   ↓
+    ↓
 SQL Analytics
-   ↓
-KPIs
-   ↓
+    ↓
 Power BI Dashboards
-   ↓
+    ↓
 Business Insights
 ```
 
-**Turning customer support operations data into actionable business intelligence through analytics and visualization.**
+Transforming customer support data into actionable business intelligence through analytics, visualization, and KPI-driven decision making.
