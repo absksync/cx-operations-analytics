@@ -16,6 +16,12 @@ An end-to-end analytics project that transforms customer support operations data
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 </div>
+# 📄 Additional Documentation
+
+- [Business Insights](docs/business_insights.md)
+- [Data Dictionary](docs/data_dictionary.md)
+- [ER Diagram](docs/er_diagram.md)
+- [SQL Analytics Showcase](docs/sql_analytics_showcase.md)
 
 ---
 
