@@ -16,12 +16,21 @@ An end-to-end analytics project that transforms customer support operations data
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
 </div>
+---
+
 # 📄 Additional Documentation
 
-- [Business Insights](docs/business_insights.md)
-- [Data Dictionary](docs/data_dictionary.md)
-- [ER Diagram](docs/er_diagram.md)
-- [SQL Analytics Showcase](docs/sql_analytics_showcase.md)
+The project includes supporting documentation that explains the analytical approach, dataset structure, SQL implementation, and business findings.
+
+| Document | Description |
+|-----------|-------------|
+| [Business Insights](docs/business_insights.md) | Key findings, recommendations, and business impact analysis |
+| [Data Dictionary](docs/data_dictionary.md) | Dataset schema, column definitions, and entity descriptions |
+| [ER Diagram](docs/er_diagram.md) | Customer support data model and entity relationships |
+| [SQL Analytics Showcase](docs/sql_analytics_showcase.md) | Advanced SQL queries, KPI calculations, and analytical examples |
+| [Dashboard Design](docs/dashboard_design.md) | Dashboard planning, KPI selection, and reporting design decisions |
+
+---
 
 ---
 
