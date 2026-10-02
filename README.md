@@ -1,184 +1,292 @@
-# 📊 CX Operations Analytics
+from pathlib import Path
+import shutil
+import zipfile
+
+# Exact uploaded screenshot paths supplied by the environment.
+uploads = [
+    Path("/mnt/data/Screenshot 2026-10-02 at 6.43.46 AM.png"),
+    Path("/mnt/data/Screenshot 2026-10-02 at 6.43.54 AM.png"),
+    Path("/mnt/data/Screenshot 2026-10-02 at 6.44.02 AM.png"),
+    Path("/mnt/data/Screenshot 2026-10-02 at 6.44.11 AM.png"),
+]
+
+stage = Path("/mnt/data/cx-operations-analytics-readme-update")
+shots = stage / "docs" / "screenshots"
+shots.mkdir(parents=True, exist_ok=True)
+
+# Copy screenshots under stable, README-friendly names.
+target_names = [
+    "powerbi-executive-overview.png",
+    "powerbi-agent-performance.png",
+    "powerbi-time-trends.png",
+    "powerbi-customer-insights.png",
+]
+for src, name in zip(uploads, target_names):
+    shutil.copy2(src, shots / name)
+
+readme = r'''# 📊 CX Operations Analytics
 
 <div align="center">
 
-### End-to-End Customer Experience & Support Operations Analytics
+### Customer Experience • Support Operations • Business Intelligence
 
-A portfolio-grade analytics pipeline that simulates customer support operations, transforms operational data with Python, analyzes CX KPIs with SQL, and prepares a dashboard-ready dataset for BI reporting.
+**Python ETL → PostgreSQL → SQL Analytics → Power BI**
+
+A production-style portfolio project that turns **100K synthetic support tickets** into decision-ready CX analytics across ticket demand, response time, resolution efficiency, escalations, agent workload, and customer satisfaction.
 
 <br/>
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-Data%20Processing-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-Database-FF0000?style=for-the-badge&logo=sqlalchemy&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Tableau](https://img.shields.io/badge/Tableau-BI-E97627?style=for-the-badge&logo=tableau&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-ETL-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-Analytics-4479A1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Power%20BI](https://img.shields.io/badge/Power%20BI-Dashboard-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![Docker](https://img.shields.io/badge/Docker-Reproducible-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Git](https://img.shields.io/badge/Git-Workflow-F05032?style=for-the-badge&logo=git&logoColor=white)
 
 </div>
 
 ---
 
-## Table of Contents
+## 🔎 Recruiter snapshot
 
-- [Overview](#-overview)
-- [Business Problem](#-business-problem)
-- [What This Project Demonstrates](#-what-this-project-demonstrates)
-- [End-to-End Architecture](#-end-to-end-architecture)
-- [Data Model](#-data-model)
-- [Analytics Covered](#-analytics-covered)
-- [SQL KPI Layer](#-sql-kpi-layer)
-- [Operational Metrics](#-operational-metrics)
-- [Dataset Scale](#-dataset-scale)
-- [Tech Stack](#-tech-stack)
-- [Repository Structure](#-repository-structure)
-- [Getting Started](#-getting-started)
-- [Python Environment](#-python-environment)
-- [Data Pipeline](#-data-pipeline)
-- [Database Initialization](#-database-initialization)
-- [Dashboard](#-dashboard)
-- [Dashboard Preview](#-dashboard-preview)
-- [Analytical Questions](#-analytical-questions)
-- [Data & Privacy](#-data--privacy)
-- [Current Status](#-current-status)
-- [Roadmap](#-roadmap)
-- [Development Workflow](#-development-workflow)
-- [Contributing](#-contributing)
-- [Documentation](#-documentation)
-- [Author](#-author)
-- [License](#-license)
+| Area | What this project demonstrates |
+|---|---|
+| **Data scale** | 5,000 customers • 50 agents • 100,000 tickets • 40,000 feedback records |
+| **ETL** | Python + Pandas |
+| **Database** | PostgreSQL 16 |
+| **Analytics** | SQL views + KPI query layer |
+| **BI** | 4-page Power BI report |
+| **CX metrics** | CSAT • first response time • resolution time • escalations |
+| **Operations** | ticket volume • status • priority • category • workload |
+| **Infrastructure** | Docker Compose |
+| **Workflow** | Git / GitHub feature-branch development |
+| **Data** | Synthetic / non-production |
 
 ---
 
-## 📌 Overview
+## 🎯 Business problem
 
-**CX Operations Analytics** is an end-to-end Customer Experience analytics project built around a simulated customer support environment.
+Customer-support teams generate large volumes of operational data, but raw ticket records do not automatically answer the questions leaders care about.
 
-The project demonstrates how operational support data can move through a practical analytics workflow:
+This project is built around questions such as:
 
-```text
-Synthetic Data
-     ↓
-Python ETL
-     ↓
-PostgreSQL
-     ↓
-SQL Views & KPI Queries
-     ↓
-Dashboard Dataset
-     ↓
-BI Visualization
-```
-
-The focus is not simply on creating charts. The project models the underlying support operation, structures the data relationally, calculates operational KPIs, and produces a dataset designed for decision-oriented CX reporting.
-
----
-
-## 🎯 Business Problem
-
-Customer support teams generate large volumes of operational data across tickets, agents, customers, priorities, response times, resolution times, and customer feedback.
-
-Without a structured analytics layer, it becomes difficult to answer questions such as:
-
-- How many support tickets are being generated?
-- Which categories generate the most demand?
-- How quickly are customers receiving their first response?
-- How long does ticket resolution take?
-- Which priorities consume the most operational time?
+- Where is support demand concentrated?
+- Which priorities consume the most resolution time?
+- How quickly are customers receiving a first response?
+- Which categories generate the most escalations?
 - How is workload distributed across agents?
-- Where does customer satisfaction vary?
-- How is support demand changing over time?
+- How does CSAT vary by category and over time?
+- Which operational patterns deserve further investigation?
 
-This project turns those operational questions into measurable KPIs.
+The result is a practical workflow that connects:
+
+**raw operational events → reusable KPIs → interactive BI reporting**
 
 ---
 
-## 💡 What This Project Demonstrates
+## 🧠 What this project demonstrates
 
 <details>
 <summary><strong>🔄 Data Engineering</strong></summary>
 
-- Synthetic operational data generation
-- Raw and processed data separation
-- Python-based ETL workflow
-- PostgreSQL loading
-- Relational schema design
-- Database-backed analytics
+- Synthetic support-data generation
+- Raw / processed data separation
+- Python-based ETL
+- Pandas transformation
+- PostgreSQL ingestion
+- Reproducible local infrastructure with Docker
 
 </details>
 
 <details>
 <summary><strong>🧮 SQL Analytics</strong></summary>
 
-- Aggregations
-- Joins
-- Grouping and sorting
-- Date-based trend analysis
+- Aggregations and grouping
+- Relational joins
+- Date-based analysis
+- Derived time metrics
 - Percentage calculations
-- Derived operational metrics
 - Reusable SQL views
+- Dedicated KPI query layer
 
 </details>
 
 <details>
-<summary><strong>📈 Customer Experience Analytics</strong></summary>
+<summary><strong>📈 CX & Operations Analytics</strong></summary>
 
-- Ticket volume
-- Ticket status distribution
-- Customer satisfaction (CSAT)
+- Ticket demand
+- Ticket lifecycle / status distribution
 - First response time
 - Resolution time
-- Agent productivity
-- Category-level analysis
-- Priority-level analysis
-- Monthly support trends
+- Resolution rate
+- Escalation rate
+- CSAT
+- Priority analysis
+- Category analysis
+- Agent workload
 
 </details>
 
 <details>
-<summary><strong>📊 Business Intelligence</strong></summary>
+<summary><strong>📊 Power BI</strong></summary>
 
-- Executive KPI design
-- Operational dashboard structure
-- Interactive filtering
-- Agent analytics
-- Customer experience reporting
-- Dashboard-ready dataset creation
+- Executive KPI cards
+- Monthly trend analysis
+- Agent performance analysis
+- Customer-insight analysis
+- Category and priority breakdowns
+- CSAT distribution
+- Resolution-time analysis
+- Resolution time vs CSAT
+- Interactive filtering / cross-filtering
+- Drill-through-ready report structure
 
 </details>
 
 ---
 
-## 🧩 End-to-End Architecture
+# 📊 Power BI report
+
+The reporting layer is organized into four pages, each with a distinct business purpose.
+
+| Page | Focus |
+|---|---|
+| **1. Executive Overview** | Overall support-health snapshot |
+| **2. Agent Performance** | Workload and agent-level service context |
+| **3. Time Trends** | Monthly demand and service-performance movement |
+| **4. Customer Insights** | CSAT, escalations, categories, and resolution relationships |
+
+### 📸 Dashboard gallery
+
+> The images below are the current Power BI report pages.
+
+### 1️⃣ Executive Overview
+
+![Power BI Executive Overview](docs/screenshots/powerbi-executive-overview.png)
+
+<details>
+<summary><strong>What this page answers</strong></summary>
+
+**Executive health at a glance.**
+
+Core KPIs currently shown:
+
+- Total Tickets — **100K**
+- Resolved Tickets — **50K**
+- Open Tickets — **25K**
+- Escalated Tickets — **25K**
+- Average CSAT — **3.00**
+- Resolution Rate — **49.9%**
+
+Supporting views cover ticket volume by month, category contribution, priority mix, and ticket status.
+
+</details>
+
+---
+
+### 2️⃣ Agent Performance
+
+![Power BI Agent Performance](docs/screenshots/powerbi-agent-performance.png)
+
+<details>
+<summary><strong>What this page answers</strong></summary>
+
+**How is support workload distributed across agents, and how does service performance vary?**
+
+The page includes:
+
+- Tickets handled per agent
+- Average resolution hours by agent
+- Average CSAT by agent
+- Agent-level workload distribution
+- Resolution-time vs CSAT analysis
+
+The goal is to provide operational context rather than reducing agent performance to one metric.
+
+</details>
+
+---
+
+### 3️⃣ Time Trends
+
+![Power BI Time Trends](docs/screenshots/powerbi-time-trends.png)
+
+<details>
+<summary><strong>What this page answers</strong></summary>
+
+**How does support behavior change over time?**
+
+The page tracks:
+
+- Ticket volume trend
+- Average resolution time trend
+- Average CSAT trend
+- Ticket status distribution by month
+- Ticket category trend by month
+
+This adds temporal context to otherwise static aggregate KPIs.
+
+</details>
+
+---
+
+### 4️⃣ Customer Insights
+
+![Power BI Customer Insights](docs/screenshots/powerbi-customer-insights.png)
+
+<details>
+<summary><strong>What this page answers</strong></summary>
+
+**Where do customer experience and operational patterns differ?**
+
+The page includes:
+
+- Ticket Category vs CSAT
+- Average Resolution Hours by Priority
+- Escalations by Category
+- CSAT Distribution
+- Ticket Volume by Category
+- Resolution Time vs CSAT
+
+The scatter analysis is intended to investigate the relationship between resolution time and customer satisfaction while using priority as a segmentation dimension.
+
+</details>
+
+---
+
+## 🧩 End-to-end architecture
 
 ```mermaid
 flowchart LR
-    A[Generate Synthetic Support Data] --> B[Python ETL]
+    A[Synthetic Support Data] --> B[Python + Pandas ETL]
     B --> C[(PostgreSQL)]
-    C --> D[SQL Views]
+    C --> D[Reusable SQL Views]
     C --> E[SQL KPI Queries]
     D --> F[Dashboard Dataset]
     E --> F
-    F --> G[Tableau Dashboard]
+    F --> G[Power BI Report]
+
+    G --> H[Executive Overview]
+    G --> I[Agent Performance]
+    G --> J[Time Trends]
+    G --> K[Customer Insights]
 ```
 
-### Pipeline Breakdown
-
-| Stage | Responsibility |
+| Layer | Responsibility |
 |---|---|
-| Data Generation | Creates simulated customers, agents, support tickets, and customer feedback |
-| ETL | Processes and loads operational datasets |
-| PostgreSQL | Stores structured relational data |
-| SQL Views | Creates reusable response and resolution metrics |
-| KPI Queries | Calculates business-facing support metrics |
-| Dashboard Dataset | Combines operational fields and derived metrics for BI |
-| Tableau | Presents the analytical output |
+| **Python** | Generate and transform operational data |
+| **PostgreSQL** | Store relational support data |
+| **SQL Views** | Derive reusable response / resolution metrics |
+| **SQL KPI Layer** | Produce business-facing analytical queries |
+| **Dashboard Dataset** | Provide BI-ready analytical fields |
+| **Power BI** | Interactive reporting and visual analysis |
 
 ---
 
-## 🗄️ Data Model
+## 🗄️ Data model
 
-The database models four core entities:
+The project models a support environment through four core entities:
 
 ```mermaid
 erDiagram
@@ -225,167 +333,109 @@ erDiagram
 
 ---
 
-## 📊 Analytics Covered
-
-### Executive KPIs
-
-- **Total Tickets**
-- **Average CSAT**
-- **Average Resolution Time**
-- **Average First Response Time**
-
-### Operational Analytics
-
-- Ticket Volume by Category
-- Ticket Status Distribution
-- Monthly Ticket Trend
-- Open vs Closed Ticket Rate
-
-### Agent Analytics
-
-- Top 10 Agents by Tickets Handled
-- Tickets Handled per Agent
-- Team-level agent context
-
-### Customer Experience Analytics
-
-- CSAT by Ticket Category
-- Resolution Time by Category
-- Resolution Time by Priority
-- First Response Time by Priority
-
----
-
-## 🧮 SQL KPI Layer
-
-The project contains a dedicated KPI query layer in:
-
-`sql/004_kpi_queries.sql`
-
-It currently contains **10 analytical queries**.
-
-| KPI | Analytical Purpose |
-|---|---|
-| Ticket Volume by Category | Understand support demand distribution |
-| Ticket Status Distribution | Monitor ticket lifecycle |
-| Top 10 Agents | Measure ticket handling volume |
-| Average CSAT by Category | Analyze customer satisfaction across categories |
-| Monthly Ticket Trend | Identify demand over time |
-| Resolution Time by Priority | Analyze operational effort by urgency |
-| First Response Time by Priority | Measure responsiveness |
-| Tickets per Agent | Understand workload distribution |
-| Open vs Closed Rate | Monitor ticket-state composition |
-| Resolution Time by Category | Identify category-level resolution patterns |
-
----
-
-## ⏱️ Operational Metrics
-
-The SQL layer derives time-based CX metrics directly from ticket timestamps.
-
-### First Response Time
-
-```text
-first_response_hours =
-(first_response_at - created_at) / 3600
-```
-
-### Resolution Time
-
-```text
-resolution_hours =
-(resolved_at - created_at) / 3600
-```
-
-These metrics are exposed through the reusable SQL view:
-
-`sql/003_views.sql`
-
----
-
-## 📦 Dataset Scale
-
-The simulated analytical environment is designed around:
+## 📦 Dataset scale
 
 | Entity | Volume |
 |---|---:|
 | Customers | 5,000 |
 | Support Agents | 50 |
 | Support Tickets | 100,000 |
-| Customer Feedback Records | 40,000 |
-| **Total Records** | **145,000+** |
+| Customer Feedback | 40,000 |
+| **Total records** | **145,000+** |
 
-> Generated CSV files are excluded from version control through `.gitignore`.
-
----
-
-## 🛠️ Tech Stack
-
-### Data Layer
-
-- PostgreSQL 16
-- SQL
-
-### ETL & Processing
-
-- Python
-- Pandas
-- SQLAlchemy
-
-### Infrastructure
-
-- Docker
-- Docker Compose
-
-### Business Intelligence
-
-- Tableau
-
-### Development
-
-- Git
-- GitHub
+> All analytical records are synthetic and intended for development / portfolio use.
 
 ---
 
-## 📁 Repository Structure
+## ⏱️ Core operational metrics
+
+```text
+First Response Hours
+= (first_response_at - created_at) / 3600
+
+Resolution Hours
+= (resolved_at - created_at) / 3600
+
+Resolution Rate
+= resolved tickets / total tickets
+
+Escalation Rate
+= escalated tickets / total tickets
+```
+
+These metrics are calculated in the analytical layer and exposed to Power BI.
+
+---
+
+## 🧮 SQL KPI layer
+
+The dedicated KPI query layer lives in:
+
+`sql/004_kpi_queries.sql`
+
+| KPI / analysis | Business purpose |
+|---|---|
+| Ticket Volume by Category | Demand concentration |
+| Ticket Status Distribution | Lifecycle monitoring |
+| Top Agents | Workload visibility |
+| Average CSAT by Category | CX comparison |
+| Monthly Ticket Trend | Demand movement |
+| Resolution Time by Priority | Operational effort |
+| First Response Time by Priority | Responsiveness |
+| Tickets per Agent | Workload distribution |
+| Open vs Closed Rate | Ticket-state composition |
+| Resolution Time by Category | Category-level service patterns |
+
+---
+
+## 🛠️ Tech stack
+
+| Layer | Technology |
+|---|---|
+| Data generation | Python |
+| Data processing | Pandas |
+| Database | PostgreSQL 16 |
+| Database access | SQLAlchemy |
+| Infrastructure | Docker / Docker Compose |
+| Analytics | SQL |
+| Business Intelligence | **Power BI** |
+| Version control | Git / GitHub |
+
+---
+
+## 📁 Repository structure
 
 ```text
 cx-operations-analytics/
 │
 ├── api/
-│   └── .gitkeep
-│
 ├── data/
 │   ├── raw/
-│   │   └── .gitkeep
-│   ├── processed/
-│   │   └── .gitkeep
-│   └── .gitkeep
+│   └── processed/
 │
 ├── docs/
 │   ├── dashboard_design.md
 │   ├── results/
 │   │   └── kpi_results.txt
 │   └── screenshots/
-│       └── dashboard-overview.png
+│       ├── powerbi-executive-overview.png
+│       ├── powerbi-agent-performance.png
+│       ├── powerbi-time-trends.png
+│       └── powerbi-customer-insights.png
 │
 ├── etl/
-│   ├── scripts/
-│   │   ├── generate_data.py
-│   │   └── load_data.py
-│   └── .gitkeep
+│   └── scripts/
+│       ├── generate_data.py
+│       └── load_data.py
 │
 ├── powerbi/
-│   └── .gitkeep
 │
 ├── sql/
 │   ├── 001_schema.sql
 │   ├── 002_seed.sql
 │   ├── 003_views.sql
 │   ├── 004_kpi_queries.sql
-│   ├── 005_dashboard_dataset.sql
-│   └── .gitkeep
+│   └── 005_dashboard_dataset.sql
 │
 ├── docker-compose.yml
 ├── .gitignore
@@ -394,9 +444,9 @@ cx-operations-analytics/
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Reproduce locally
 
-### 1. Clone the Repository
+### 1. Clone
 
 ```bash
 git clone https://github.com/absksync/cx-operations-analytics.git
@@ -405,287 +455,113 @@ cd cx-operations-analytics
 
 ### 2. Start PostgreSQL
 
-The repository includes a Docker Compose configuration for PostgreSQL 16.
-
 ```bash
 docker compose up -d
 ```
 
-The configured database is:
-
-```text
-Database:  cx_analytics
-User:      cx_admin
-Port:      5432
-Container: cx-postgres
-```
-
-### 3. Verify the Container
-
-```bash
-docker ps
-```
-
----
-
-## 🐍 Python Environment
-
-Create a virtual environment:
+### 3. Create a Python environment
 
 ```bash
 python -m venv .venv
-```
-
-Activate it on macOS/Linux:
-
-```bash
 source .venv/bin/activate
 ```
 
-Install the required packages:
+### 4. Install dependencies
 
 ```bash
 pip install pandas sqlalchemy psycopg2-binary
 ```
 
----
-
-## ⚙️ Data Pipeline
-
-The ETL layer currently contains two primary scripts.
-
-### Generate Data
-
-`etl/scripts/generate_data.py`
-
-Generates the simulated customer support datasets.
-
-### Load Data
-
-`etl/scripts/load_data.py`
-
-Loads generated datasets into PostgreSQL.
-
-A typical workflow is:
+### 5. Generate and load data
 
 ```bash
 python etl/scripts/generate_data.py
 python etl/scripts/load_data.py
 ```
 
-> Run the scripts from the repository root so their relative paths resolve correctly.
+### 6. Execute the SQL layer
 
----
+Run in order:
 
-## 🗃️ Database Initialization
-
-Run the SQL files in order.
-
-### 1. Schema
-
-`sql/001_schema.sql`
-
-Creates:
-
-- `customers`
-- `agents`
-- `support_tickets`
-- `customer_feedback`
-
-### 2. Seed Layer
-
-`sql/002_seed.sql`
-
-Reserved for seed data.
-
-### 3. Reusable Metrics View
-
-`sql/003_views.sql`
-
-Creates:
-
-`ticket_resolution_metrics`
-
-### 4. KPI Queries
-
-`sql/004_kpi_queries.sql`
-
-Contains the analytical KPI layer.
-
-### 5. Dashboard Dataset
-
-`sql/005_dashboard_dataset.sql`
-
-Produces a combined analytical dataset containing:
-
-- Ticket information
-- Agent information
-- Customer information
-- CSAT
-- First response hours
-- Resolution hours
-
----
-
-## 📊 Dashboard
-
-The dashboard design is documented in:
-
-`docs/dashboard_design.md`
-
-### Dashboard Sections
-
-```mermaid
-flowchart TB
-    A[CX Operations Dashboard]
-
-    A --> B[Executive KPIs]
-    A --> C[Operational Analytics]
-    A --> D[Agent Analytics]
-    A --> E[Customer Experience Analytics]
-
-    B --> B1[Total Tickets]
-    B --> B2[Average CSAT]
-    B --> B3[Avg Resolution Time]
-    B --> B4[Avg First Response Time]
-
-    C --> C1[Ticket Volume]
-    C --> C2[Status Distribution]
-    C --> C3[Monthly Trend]
-
-    D --> D1[Top Agents]
-    D --> D2[Tickets per Agent]
-
-    E --> E1[CSAT by Category]
-    E --> E2[Resolution by Category]
+```text
+sql/001_schema.sql
+sql/002_seed.sql
+sql/003_views.sql
+sql/004_kpi_queries.sql
+sql/005_dashboard_dataset.sql
 ```
 
-### Dashboard Filters
+### 7. Open the Power BI report
 
-The dashboard design includes:
-
-- Ticket Category
-- Priority
-- Status
-- Month
+Connect Power BI to the dashboard dataset and open the local report from the `powerbi/` workspace.
 
 ---
 
-## 🖼️ Dashboard Preview
+## 💼 Interview-ready explanation
 
-![CX Operations Dashboard](docs/screenshots/dashboard-overview.png)
-
----
-
-## 🔍 Analytical Questions
-
-This project is designed to answer operational questions such as:
+> **"I built an end-to-end CX operations analytics pipeline that starts with synthetic support data, transforms it through Python ETL, stores it in a relational PostgreSQL model, calculates reusable KPIs with SQL, and presents the results through a four-page Power BI report. I focused the reporting layer on support volume, response time, resolution efficiency, escalations, agent workload, and CSAT so the project could answer operational questions rather than just display charts."**
 
 <details>
-<summary><strong>Which support categories generate the most demand?</strong></summary>
+<summary><strong>Questions this project prepares me to discuss</strong></summary>
 
-Use ticket volume by category to identify where operational workload is concentrated.
+### Why PostgreSQL?
+To separate the data-storage / relational layer from the BI layer and keep the workflow reproducible and queryable.
 
-</details>
+### Why SQL + Power BI?
+SQL provides reusable data preparation and KPI logic; Power BI provides interactive visual analysis and reporting.
 
-<details>
-<summary><strong>Which priorities require the most resolution time?</strong></summary>
+### First response time vs resolution time?
+First response time measures the delay until an initial response. Resolution time measures the elapsed time until ticket resolution.
 
-Compare average resolution hours by priority.
-
-</details>
-
-<details>
-<summary><strong>How quickly are customers receiving an initial response?</strong></summary>
-
-Analyze average first response hours by priority and over time.
-
-</details>
-
-<details>
-<summary><strong>Where does customer satisfaction vary?</strong></summary>
-
-Compare average CSAT across ticket categories.
-
-</details>
-
-<details>
-<summary><strong>How is support workload distributed?</strong></summary>
-
-Compare tickets handled across individual agents.
+### What would I build next?
+SLA compliance, team-level analysis, stronger drill-through navigation, anomaly detection, automated refresh, and scheduled reporting.
 
 </details>
 
 ---
 
-## 🔐 Data & Privacy
-
-This project uses **synthetic customer support data** for analytics and development purposes.
-
-No real customer information is required to reproduce the analytical workflow.
-
-Generated CSV files are excluded from version control through the repository's `.gitignore`.
-
----
-
-## ✅ Current Status
+## ✅ Project status
 
 | Area | Status |
 |---|---|
-| Repository structure | ✅ |
-| PostgreSQL container | ✅ |
+| Repository foundation | ✅ |
+| PostgreSQL | ✅ |
 | Relational schema | ✅ |
 | Synthetic data generation | ✅ |
-| Data loading scripts | ✅ |
-| SQL metric view | ✅ |
-| KPI query layer | ✅ |
-| Dashboard dataset query | ✅ |
-| Dashboard design documentation | ✅ |
-| Dashboard screenshot | ✅ |
-| API layer | 🧩 Placeholder |
-| Power BI directory | 🧩 Placeholder |
+| Python ETL | ✅ |
+| SQL metric views | ✅ |
+| SQL KPI layer | ✅ |
+| Dashboard dataset | ✅ |
+| Power BI — Executive Overview | ✅ |
+| Power BI — Agent Performance | ✅ |
+| Power BI — Time Trends | ✅ |
+| Power BI — Customer Insights | ✅ |
+| **Tableau reporting layer** | **❌ Replaced by Power BI** |
+| API layer | 🧩 Future |
 
 ---
 
-## 🗺️ Roadmap
+## 🧭 Focused roadmap
 
-### Phase 1 — Analytics Foundation
+### Analytics depth
 
-- [x] PostgreSQL setup
-- [x] Relational schema
-- [x] Synthetic data generation
-- [x] ETL scripts
-- [x] SQL KPI layer
-- [x] Dashboard dataset
+- [ ] SLA compliance / breach-rate analysis
+- [ ] Team-level performance
+- [ ] Stronger drill-through experience
+- [ ] Exception / anomaly analysis
+- [ ] Automated KPI reporting
 
-### Phase 2 — BI Expansion
-
-- [ ] Add finalized BI workbook artifacts
-- [ ] Expand dashboard interactions
-- [ ] Add SLA compliance metrics
-- [ ] Add escalation-rate analysis
-- [ ] Add team-level performance analysis
-
-### Phase 3 — CX Intelligence
-
-- [ ] Trend anomaly detection
-- [ ] Deeper customer segmentation
-- [ ] Cohort-style support analysis
-- [ ] Root-cause exploration
-- [ ] Automated reporting
-
-### Phase 4 — Application Layer
+### Application layer
 
 - [ ] Analytics API
 - [ ] Programmatic KPI access
-- [ ] Dashboard application
 - [ ] Automated pipeline execution
+
+> The roadmap prioritizes analytical depth before adding unnecessary application features.
 
 ---
 
-## 🧪 Development Workflow
-
-The repository follows a feature-oriented Git workflow.
+## 🧪 Git workflow
 
 ```text
 main
@@ -700,65 +576,22 @@ Example:
 ```bash
 git checkout develop
 git checkout -b feature/new-kpi
-```
 
-Commit with a focused message:
-
-```bash
 git add .
 git commit -m "feat: add SLA compliance KPI"
-```
 
-Push the feature:
-
-```bash
 git push origin feature/new-kpi
 ```
 
-Then open a pull request:
-
-```text
-feature/* → develop
-develop   → main
-```
+Pull requests target `develop`; stable work is promoted to `main`.
 
 ---
 
-## 🤝 Contributing
+## 🔐 Data & privacy
 
-Contributions and improvements are welcome.
+This project uses synthetic customer-support data only.
 
-Before opening a pull request:
-
-1. Create a feature branch.
-2. Keep changes focused.
-3. Test SQL and ETL changes locally.
-4. Update documentation when behavior changes.
-5. Open a pull request against `develop`.
-
----
-
-## 📚 Documentation
-
-Project documentation lives under:
-
-```text
-docs/
-├── dashboard_design.md
-├── results/
-└── screenshots/
-```
-
-The SQL layer is organized sequentially under:
-
-```text
-sql/
-├── schema
-├── seed
-├── views
-├── KPI queries
-└── dashboard dataset
-```
+No production customer records, credentials, API keys, or real customer PII are required.
 
 ---
 
@@ -768,7 +601,7 @@ sql/
 
 **Abhishek Singh**
 
-Built as a practical Customer Experience / Operations Analytics portfolio project.
+CSE • Data & Analytics • Customer Experience Operations
 
 [GitHub](https://github.com/absksync)
 
@@ -776,18 +609,20 @@ Built as a practical Customer Experience / Operations Analytics portfolio projec
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License**.
-
-See the repository for the applicable license terms.
-
----
-
 <div align="center">
 
-### Turning support operations data into actionable CX insights.
-
-⭐ Star the repository if you find the project useful.
+### Raw support events → structured analytics → decision-ready CX reporting.
 
 </div>
+'''
+
+(stage / "README.md").write_text(readme, encoding="utf-8")
+
+zip_path = Path("/mnt/data/cx-operations-analytics-readme-update.zip")
+with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as z:
+    z.write(stage / "README.md", "README.md")
+    for p in shots.iterdir():
+        z.write(p, f"docs/screenshots/{p.name}")
+
+print(f"Prepared: {stage / 'README.md'}")
+print(f"Prepared ZIP: {zip_path}")
